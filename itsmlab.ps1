@@ -10,7 +10,13 @@
 #   3. ghcr.io/swasik/itsmlab:2026.
 # The current directory is mounted at /work inside the container, and the Docker Desktop socket is
 # mounted so that the checker can run "docker compose" for your service.
-# If PowerShell refuses to run scripts:  powershell -ExecutionPolicy Bypass -File .\itsmlab.ps1 doctor
+# If PowerShell refuses to run scripts, allow local scripts once (no administrator rights needed):
+#   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
+    [Console]::Error.WriteLine("itsmlab.ps1: docker was not found. Install Docker Desktop (PREWORK.md, step 1), start it, open a new PowerShell window and rerun.")
+    exit 2
+}
 
 $defaultImage = "ghcr.io/swasik/itsmlab:2026"
 $image = ""

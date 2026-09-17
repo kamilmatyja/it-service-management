@@ -7,7 +7,7 @@ built in Lab 1, extended in the later labs. Keep it public, and keep personal da
 ## The one command
 
     ./itsmlab.sh verify 1            # Linux, macOS
-    .\itsmlab.ps1 verify 1           # Windows PowerShell
+    .\itsmlab.ps1 verify 1           # Windows PowerShell (once before: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned)
 
 It runs the published Tier A checker (a container) against this directory: builds and starts your service with
 `docker compose`, runs the published checks, prints a table, and exits 0 when every Core spec passes. Add
@@ -29,6 +29,7 @@ write your own), and read the course package (`README.md`, `PREWORK.md`, `lab1/`
 | `src/` | your implementation |
 | `.github/workflows/tier-a.yml` | runs the checker on every push and publishes `report.json` as an artifact with a step summary |
 | `.gitignore` | keeps `report.json`, virtual environments and local data out of git |
+| `.gitattributes` | LF line endings on every system, so the checker's git sees a clean tree on Windows too; keep it |
 
 ## Every push runs the checker
 
