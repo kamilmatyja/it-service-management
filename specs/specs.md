@@ -1,16 +1,22 @@
-<!-- ai-generated: 100% - Generated using Gemini CLI -->
+<!-- ai-generated: 100% - Generated using Gemini CLI for API specification -->
 
-What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text for Letraset's Body Type sheets. It has survived not only many decades, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised thanks to these sheets and more recently with desktop publishing software like Aldus PageMaker and Microsoft Word including versions of Lorem Ipsum.
+# Specification for svcdesk API (Lab 1)
 
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+This document outlines the API specifications for the svcdesk ticketing system, resolving the inherent contradictions in the initial requirements document.
 
+## C1: SLA clock for P1 (Resolution: wallclock)
+For P1 (Critical) tickets, time is of the essence. The SLA clock for P1 tickets will run 24/7 using the wall-clock approach. It will not pause outside of business hours. P1 tickets must be acknowledged within 15 minutes and resolved within 4 hours, regardless of whether they are reported on Monday morning or Friday night. For P2-P4, the standard business-hours clock (Monday-Friday, 08:00-16:00 Europe/Warsaw) applies.
 
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+## C2: Closed tickets and reopening (Resolution: reopen)
+Users must be able to reopen tickets if a fix fails, even if the ticket was marked as closed. Therefore, the system allows the `reopen` action from both the `resolved` state AND the `closed` state. This action is permitted strictly within a 7-day window after the resolution or closure timestamp. Reopening a ticket returns its state to `in_progress`.
 
-The standard chunk of Lorem Ipsum used since 1966 is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+## C3: VIP reporters and the priority matrix (Resolution: vip)
+VIP reporters require expedited support. The priority matrix will compute the initial priority based on impact and urgency. However, if `reporter.vip` is true and the computed priority is P3 or P4, the system will automatically upgrade the priority to P2. A computed P1 remains P1.
 
-Where can I get some?
-There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+## General Endpoints
+- `GET /health`: Healthcheck endpoint.
+- `POST /tickets`: Create a new ticket.
+- `GET /tickets`: List tickets with optional filters.
+- `GET /tickets/{id}`: Fetch ticket details.
+- `GET /tickets/{id}/sla`: Fetch SLA status (breached/paused).
+- Transitions: `POST /tickets/{id}/ack`, `/start`, `/resolve`, `/close`, `/reopen`.
