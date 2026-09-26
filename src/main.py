@@ -491,7 +491,8 @@ async def calculate_dora_metrics(request: Request):
             c = commits[sha]
 
             if c.get("branch") != "main":
-                commits_never_on_main.add(sha)
+                if d_in_window:
+                    commits_never_on_main.add(sha)
 
             if d_is_success:
                 # E1 / R-08 Lead Time Pairs

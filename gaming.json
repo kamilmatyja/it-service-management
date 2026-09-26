@@ -58,7 +58,7 @@
     "anomalies": {
       "negative_lead_time_pairs": 0,
       "deployments_without_commits": 52,
-      "commits_never_on_main": 4,
+      "commits_never_on_main": 2,
       "revert_chains_collapsed": 2,
       "overlapping_incident_pairs": 11
     },
