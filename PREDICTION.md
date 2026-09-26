@@ -2,7 +2,7 @@
 feature: "DORA metrics endpoint and JSONL log parser"
 predicted_minutes: 60
 predicted_at: "2026-09-26T15:30:00Z"
-feature_path: "src/main.py"
+feature_path: "src/dora_logic.py"
 ---
 <!-- ai-generated: 100% - Generated using Gemini -->
 
