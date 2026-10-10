@@ -1,0 +1,21 @@
+{
+  "title": "Lab 3 Dashboard",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Traffic",
+      "targets": [{"expr": "sum by (http_route) (rate(http_server_request_duration_seconds_count[$__rate_interval]))", "refId": "A"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Errors",
+      "targets": [{"expr": "sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~\"5..\"}[$__rate_interval])) / sum(rate(http_server_request_duration_seconds_count[$__rate_interval]))", "refId": "A"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "p99 Latency",
+      "targets": [{"expr": "histogram_quantile(0.99, sum by (le) (rate(http_server_request_duration_seconds_bucket[$__rate_interval])))", "refId": "A"}]
+    }
+  ],
+  "schemaVersion": 38
+}

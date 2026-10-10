@@ -5,11 +5,15 @@ import uuid
 from datetime import datetime, timezone, time, timedelta
 from zoneinfo import ZoneInfo
 from typing import Optional, List, Dict, Any, Set, Tuple
-from fastapi import FastAPI, Request, Depends, Body
+from fastapi import FastAPI, Request, Depends, Body, Response
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from pydantic import BaseModel, Field, ConfigDict, field_serializer, field_validator
+import time
+import httpx
+from urllib.parse import quote
+from prometheus_client import Histogram, generate_latest
 
 app = FastAPI()
 
@@ -602,3 +606,68 @@ async def calculate_dora_metrics(request: Request):
     }
 
     return response
+
+LADDER = [
+    0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1,
+    0.115, 0.13, 0.15, 0.17, 0.19, 0.21, 0.23, 0.25, 0.28, 0.31,
+    0.34, 0.38, 0.42, 0.47, 0.52, 0.6, 0.8, 1.0, 2.0, 5.0
+]
+
+REQUEST_DURATION = Histogram(
+    'http_server_request_duration_seconds',
+    'HTTP request duration in seconds',
+    ['http_request_method', 'http_route', 'http_response_status_code'],
+    buckets=LADDER
+)
+
+@app.middleware("http")
+async def prometheus_middleware(request: Request, call_next):
+    start_time = time.perf_counter()
+    status_code = 500
+    try:
+        response = await call_next(request)
+        status_code = response.status_code
+    except Exception as e:
+        status_code = 500
+        raise e
+    finally:
+        duration = time.perf_counter() - start_time
+        route = request.scope.get("route")
+
+        # Zapobieganie eksplozji kardynalności - zbieramy szablon (np. /tickets/{id}) lub "unmatched"
+        route_path = route.path if route else "unmatched"
+
+        REQUEST_DURATION.labels(
+            http_request_method=request.method,
+            http_route=route_path,
+            http_response_status_code=str(status_code)
+        ).observe(duration)
+    return response
+
+@app.get("/metrics")
+async def get_metrics():
+    # API eksponuje tekstowy format danych Prometheusa
+    return Response(
+        content=generate_latest(),
+        media_type="text/plain; version=0.0.4; charset=utf-8"
+    )
+
+# --- Endpoint /kb/search (Lab 3) ---
+
+KB_INDEX_URL = os.environ.get("KB_INDEX_URL", "http://kb-index:8080")
+
+@app.get("/kb/search")
+async def kb_search(q: Optional[str] = None):
+    if not q or len(q) < 1 or len(q) > 200:
+        raise ErrorResponseException(422, "validation", "q must be between 1 and 200 characters")
+
+    try:
+        async with httpx.AsyncClient() as client:
+            resp = await client.get(f"{KB_INDEX_URL}/search", params={"q": q}, timeout=5.0)
+            if resp.status_code == 200:
+                data = resp.json()
+                return {"query": q, "hits": data.get("hits", [])}
+            else:
+                raise ErrorResponseException(502, "upstream_unavailable", "Upstream returned non-200 status")
+    except httpx.RequestError:
+        raise ErrorResponseException(502, "upstream_unavailable", "Upstream connection error or timeout")

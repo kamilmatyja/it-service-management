@@ -1,0 +1,9 @@
+# ai-generated: 0% - Hand-written
+prometheus:
+  prometheusSpec:
+    retention: 2h
+    resources:
+      limits:
+        memory: 1Gi
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false

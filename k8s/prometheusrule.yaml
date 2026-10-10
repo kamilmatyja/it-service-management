@@ -1,0 +1,66 @@
+# ai-generated: 0% - Hand-written
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: svcdesk-rules
+  namespace: default
+spec:
+  groups:
+    - name: svcdesk-slo
+      rules:
+        - alert: KbSearchAvailabilityFast
+          expr: >-
+            (sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~"5..",http_route="/kb/search",job="svcdesk"}[1h]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[1h])) > 14.4 * (1 - 0.99))
+            and
+            (sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~"5..",http_route="/kb/search",job="svcdesk"}[5m]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[5m])) > 14.4 * (1 - 0.99))
+          for: 5m
+          labels:
+            service: svcdesk
+            severity: P1
+            slo: availability
+          annotations:
+            summary: "High error rate on /kb/search"
+        - alert: KbSearchAvailabilitySlow
+          expr: >-
+            (sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~"5..",http_route="/kb/search",job="svcdesk"}[6h]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[6h])) > 6 * (1 - 0.99))
+            and
+            (sum(rate(http_server_request_duration_seconds_count{http_response_status_code=~"5..",http_route="/kb/search",job="svcdesk"}[30m]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[30m])) > 6 * (1 - 0.99))
+          for: 30m
+          labels:
+            service: svcdesk
+            severity: P2
+            slo: availability
+          annotations:
+            summary: "Elevated error rate on /kb/search"
+        - alert: KbSearchLatencyFast
+          expr: >-
+            (1 - (sum(rate(http_server_request_duration_seconds_bucket{http_route="/kb/search",job="svcdesk",le="0.25"}[1h]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[1h]))) > 14.4 * (1 - 0.99))
+            and
+            (1 - (sum(rate(http_server_request_duration_seconds_bucket{http_route="/kb/search",job="svcdesk",le="0.25"}[5m]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[5m]))) > 14.4 * (1 - 0.99))
+          for: 5m
+          labels:
+            service: svcdesk
+            severity: P1
+            slo: latency
+          annotations:
+            summary: "High latency on /kb/search"
+        - alert: KbSearchLatencySlow
+          expr: >-
+            (1 - (sum(rate(http_server_request_duration_seconds_bucket{http_route="/kb/search",job="svcdesk",le="0.25"}[6h]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[6h]))) > 6 * (1 - 0.99))
+            and
+            (1 - (sum(rate(http_server_request_duration_seconds_bucket{http_route="/kb/search",job="svcdesk",le="0.25"}[30m]))
+            / sum(rate(http_server_request_duration_seconds_count{http_route="/kb/search",job="svcdesk"}[30m]))) > 6 * (1 - 0.99))
+          for: 30m
+          labels:
+            service: svcdesk
+            severity: P2
+            slo: latency
+          annotations:
+            summary: "Elevated latency on /kb/search"
