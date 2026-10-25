@@ -9,7 +9,7 @@ lab4_postmortem:
   mttd_seconds: 176
   mtta_seconds: 50
   mttr_seconds: 476
-  identified_flags: [productCatalogFailure, paymentFailure]
+  identified_flags: [paymentFailure, adManualGc]
 ---
 <!-- ai-generated: 0% - Hand-written postmortem -->
 
@@ -31,13 +31,13 @@ The checkout and payment processes failed for users, causing a complete inabilit
 Users experienced severe HTTP 500 errors during checkout for exactly 8 minutes. The query `sum(rate(traces_span_metrics_calls_total{service_name="payment", status_code="STATUS_CODE_ERROR"}[5m]))` showed an error rate spiking heavily to over 8 failed requests per second, meaning zero successful transactions occurred during peak impact.
 
 ## Root Causes
-A feature flag misconfiguration was enabled, directly causing unhandled exceptions in the payment and product-catalog services, which cascaded to the checkout flow.
+A feature flag misconfiguration was enabled, directly causing unhandled exceptions in the payment and causing unhandled exceptions in the payment service and severe garbage collection stalls in the ad service, which cascaded to the checkout flow.
 
 ## Trigger
 The incident was triggered at the onset when the flag management system propagated the faulty configuration to the production instances.
 
 ## Resolution
-Service was fully restored by manually overriding the feature flags back to the `off` state via the control plane, bringing the backend services back to healthy operations.
+Service was fully restored by manually overriding the feature flags paymentFailure and adManualGc to `off` state via the control plane, bringing the backend services back to healthy operations.
 
 ## Detection
 The incident was detected by the `ShopCheckoutErrors` alert monitoring the HTTP 500 status codes on the backend. Our MTTD was exactly 176 seconds. Without this automated alert, the issue would likely have been noticed by customer support fielding angry user tickets much later.
