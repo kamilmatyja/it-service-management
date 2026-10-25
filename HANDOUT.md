@@ -483,7 +483,7 @@ every model message verbatim and every tool call with its arguments and result, 
 variables: `BASE_URL`, `API_KEY`, `MODEL`, `PROMETHEUS_URL`, `MAX_STEPS` (model calls before it must answer,
 default 8), `TRANSCRIPT` (the transcript's path).
 
-**Without AI: the recorded investigator transcript**, `transcript-recorded.md` in a recording's subfolder of the
+**Without AI: the recorded investigator transcript**, `transcript.md` in a recording's subfolder of the
 Moodle folder "Laboratory 4 recordings" (`lab4-rec-1`, `lab4-rec-3` or `lab4-rec-4`, [recorded/README.md](recorded/README.md)):
 an agent's investigation of that recording, saved verbatim. Copy it to `ai-rca/transcript.md`, name its agent and
 model in `investigator` as the transcript records them, and score it. On the recorded path take your recording's

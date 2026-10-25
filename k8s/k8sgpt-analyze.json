@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "errors": [],
+  "results": [
+    {
+      "kind": "Pod",
+      "name": "default/email-service-bdf9f-xyz",
+      "error": [
+        {"text": "Pod has been OOMKilled"}
+      ],
+      "details": "The container reached its memory limit.",
+      "parentObject": "Deployment/email-service"
+    }
+  ]
+}

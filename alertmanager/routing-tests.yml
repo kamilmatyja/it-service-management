@@ -1,0 +1,15 @@
+# ai-generated: 0% - Hand-written
+routes:
+  - labels: {alertname: CheckoutErrorRateHigh, service: checkout, severity: P1}
+    receivers: [pager]
+  - labels: {alertname: CheckoutLatencyHigh, service: checkout, severity: P2}
+    receivers: [chat]
+  - labels: {alertname: KbSearchAvailabilityFast, service: svcdesk, slo: availability, severity: P1}
+    receivers: [pager]
+inhibitions:
+  - source: {alertname: CheckoutErrorRateHigh, service: checkout, severity: P1}
+    target: {alertname: CheckoutLatencyHigh, service: checkout, severity: P2}
+    inhibited: true
+  - source: {alertname: CheckoutErrorRateHigh, service: checkout, severity: P1}
+    target: {alertname: CheckoutLatencyHigh, service: frontend, severity: P2}
+    inhibited: false

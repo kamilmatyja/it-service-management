@@ -43,7 +43,7 @@ recording, and I-32 does not apply to it.
 |---|---|---|
 | `tsdb-snapshot.tar.gz` | the Prometheus snapshot of the run | `incident/tsdb-snapshot.tar.gz` in your repository |
 | `ticket.json` | the incident's P1 ticket, as `svcdesk` answered `GET /tickets/{id}` | `incident/ticket.json` in your repository |
-| `transcript-recorded.md` | the recorded investigator's transcript: the path without AI (AI usage in the handout) | stays in the recording's subfolder: the one of your recording is about your incident |
+| `transcript.md` | the recorded investigator's transcript: the path without AI (AI usage in the handout) | stays in the recording's subfolder: the one of your recording is about your incident |
 
 ## What you do on it
 
@@ -66,7 +66,7 @@ recording, and I-32 does not apply to it.
    services it affects (INCIDENT-SPEC.md section 2.2). That is harder than reading `/flags.json`, and it is the same
    `identified_flags` threshold (I-22).
 5. **The AI investigator** works on the served recording (below), with the Gemini or the local path; or, without AI,
-   you score `transcript-recorded.md`.
+   you score `transcript.md`.
 6. **The postmortem and the ledger** are yours. Several students work the same recording and so share its fault;
    what they write about it is each one's own work, and the lecturer sees who worked which recording - and which
    recording each login was assigned.

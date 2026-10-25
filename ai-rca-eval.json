@@ -1,0 +1,40 @@
+{
+  "investigator": {
+    "agent": "qwen3:4b-instruct",
+    "model": "qwen3:4b-instruct",
+    "mcp_server": "prom_mcp.py (mcp 2.2.0)",
+    "transcript": "ai-rca/transcript.md"
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "hypothesis": "The payment service's internal \"charge\" span is failing, as evidenced by the presence of error counts in the raw data for `traces_span_metrics_calls_total{service_name=\"payment\", span_name=\"charge\", status_code=\"STATUS_CODE_ERROR\"}`.",
+      "component": "payment",
+      "predicts": "sum(rate(traces_span_metrics_calls_total{service_name=\"payment\", status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0",
+      "at": "2026-10-12T06:41:00Z",
+      "result": true,
+      "verdict": "correct",
+      "evidence": "Query returns a non-empty result showing > 0 errors during the incident but none 5 minutes prior."
+    },
+    {
+      "id": "H2",
+      "hypothesis": "The internal \"charge\" span within the payment service is failing, which likely causes downstream failures in the checkout service, as indicated by the correlation between `traces_span_metrics_calls_total{service_name=\"payment\", span_name=\"charge\", status_code=\"STATUS_CODE_ERROR\"}` and the error pattern observed in checkout's \"PaymentService/Charge\" span.",
+      "component": "checkout",
+      "predicts": "sum(rate(traces_span_metrics_calls_total{service_name=\"checkout\", status_code=\"STATUS_CODE_ERROR\"}[5m])) > 0",
+      "at": "2026-10-12T06:41:00Z",
+      "result": true,
+      "verdict": "correct",
+      "evidence": "Checkout errors correlate perfectly with the ongoing fault in the payment downstream dependency."
+    },
+    {
+      "id": "H3",
+      "hypothesis": "The payment service's \"charge\" span shows increasing error counts over time, indicating a failure in the core transaction processing logic, as shown in `traces_span_metrics_calls_total{service_name=\"payment\", span_name=\"charge\", status_code=\"STATUS_CODE_ERROR\"}`.",
+      "component": "ad",
+      "predicts": "sum(rate(traces_span_metrics_calls_total{service_name=\"ad\", status_code=\"STATUS_CODE_ERROR\"}[5m])) > 1000",
+      "at": "2026-10-12T06:41:00Z",
+      "result": false,
+      "verdict": "hallucinated",
+      "evidence": "Ad service was healthy and did not throw 1000s of errors, making this falsified."
+    }
+  ]
+}

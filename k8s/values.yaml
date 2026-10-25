@@ -5,5 +5,3 @@ prometheus:
     resources:
       limits:
         memory: 1Gi
-    ruleSelectorNilUsesHelmValues: false
-    serviceMonitorSelectorNilUsesHelmValues: false
