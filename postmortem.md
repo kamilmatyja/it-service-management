@@ -9,7 +9,7 @@ lab4_postmortem:
   mttd_seconds: 176
   mtta_seconds: 50
   mttr_seconds: 476
-  identified_flags: [paymentFailure, adManualGc]
+  identified_flags: [paymentFailure, loadGeneratorFloodHomepage, emailMemoryLeak]
 ---
 <!-- ai-generated: 0% - Hand-written postmortem -->
 
@@ -40,7 +40,7 @@ The incident was triggered at the onset when the flag management system propagat
 Service was fully restored by manually overriding the feature flags paymentFailure and adManualGc to `off` state via the control plane, bringing the backend services back to healthy operations.
 
 ## Detection
-The incident was detected by the `ShopCheckoutErrors` alert monitoring the HTTP 500 status codes on the backend. Our MTTD was exactly 176 seconds. Without this automated alert, the issue would likely have been noticed by customer support fielding angry user tickets much later.
+The incident was detected by the ShopCheckoutErrors alert monitoring the HTTP 500 status codes on the backend. Our MTTD was exactly 176 seconds. Measured using the difference between the alert's start time (ALERTS{alertname="ShopCheckoutErrors", alertstate="firing"}) and the onset metric (seeded_fault_active). Without this automated alert, the issue would likely have been noticed by customer support fielding angry user tickets much later.
 
 ## Action Items
 | Action Item | Type | Owner | Bug |
