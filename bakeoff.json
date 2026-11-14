@@ -2,6 +2,14 @@
   "set": "lab5-canary",
   "defects": 8,
   "tools": {
+    "ai-reviewer": {
+      "tp": 8,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
     "gitleaks": {
       "tp": 2,
       "fp": 1,

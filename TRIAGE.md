@@ -1,6 +1,6 @@
 ---
 lab5_triage:
-  image: ghcr.io/kamilmatyja/it-service-management@sha256:56ad9be1a8474a06e40b0ddc183d420aaec7ff04619f8892d66e846c25c1c2ff
+  image: ghcr.io/kamilmatyja/it-service-management@sha256:ea76bdbe6ac8e83af86a8fe350de6c757b5bd84bbfa52c965a73c05aff9ea1d3
   sarif_receipt: 376
 ---
 <!-- ai-generated: 100% - drafted from this repository's receipted SARIF and bake-off results -->
@@ -28,3 +28,9 @@ reporting rather than additional blocking gates. A03, the path-traversal defect,
 by any of the five detectors, showing that a clean scan cannot establish absence of defects. Every recall here is
 an upper bound for real maintenance work: detectors were measured against a small set of deliberately seeded,
 labelled examples, not a representative sample of the service's future defects.
+
+The local AI reviewer matched all eight labelled defects (TP 8, FP 0, FN 0; precision, recall and F1 are 1.000).
+This review was run after the canary labels had been revealed, so it is a post-reveal consistency check, not a
+blinded estimate of an AI detector's expected performance. Its raw answer is preserved in
+`bakeoff/transcript.md`; `tools/ai-to-sarif.py` converted it to the `ai-reviewer` run in `bakeoff.json`. The
+perfect score should therefore not be compared as if it were an independent prospective bake-off.
