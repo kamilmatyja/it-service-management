@@ -3,12 +3,13 @@
 # on the built image, vulnerabilities HIGH or CRITICAL that have a fix, .trivyignore applied - and a Syft SPDX 2.3 SBOM
 # (artifact `sbom`). On main only, after the gate passed: push ghcr.io/<owner>/<repo>:<commit sha> (lower case), read
 # the pushed digest, and attest that subject twice with actions/attest - build provenance, then the SBOM - both pushed
-# to the registry next to the image. `gh attestation verify oci://ghcr.io/<owner>/<repo>@<digest> -R <owner>/<repo>`
-# then accepts it (P-09). The package starts private: make it public once, after the first push (README.md).
+# to the registry next to the image and stored as repository attestations (P-09). The package starts private: make it
+# public once, after the first push (README.md).
 #
 # The scanners never see the Docker socket: the built image is saved to a tar file that Trivy and Syft read. Both are
 # official images pinned by tag and digest (inputs below; keep the Trivy pin equal to ../scan-deps/action.yml's) and run
-# as the runner's user. The job needs packages: write, id-token: write and attestations: write (ci.yml).
+# as the runner's user. The job needs packages: write, id-token: write, attestations: write and
+# artifact-metadata: write (ci.yml).
 name: image
 description: Build the image, gate it on fixable HIGH/CRITICAL (Trivy), SBOM (Syft); on main push to GHCR and attest
 
@@ -135,8 +136,6 @@ runs:
         subject-name: ${{ steps.prep.outputs.name }}
         subject-digest: ${{ steps.push.outputs.digest }}
         push-to-registry: true
-        # Storage records exist for organisation-owned repositories only (actions/attest README); yours is personal.
-        create-storage-record: false
 
     - name: Attest the SBOM (main only)
       if: github.ref == 'refs/heads/main'
@@ -146,7 +145,6 @@ runs:
         subject-digest: ${{ steps.push.outputs.digest }}
         sbom-path: ${{ runner.temp }}/image/sbom.spdx.json
         push-to-registry: true
-        create-storage-record: false
 
     - name: Log out of GHCR (main only)
       if: always() && github.ref == 'refs/heads/main'

@@ -86,6 +86,7 @@ jobs:
       packages: write # push ghcr.io/<owner>/<repo> (main only)
       id-token: write # sign the two attestations (main only)
       attestations: write # store them in this repository (main only)
+      artifact-metadata: write # create GitHub attestation storage records (main only)
     steps:
       - name: Check out
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
