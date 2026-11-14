@@ -8,7 +8,11 @@ WORKDIR /app
 # Kopiowanie plików zależności i ich instalacja 
 # (Wykonujemy to najpierw, aby wykorzystać cache warstw Dockera)
 COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir -r /app/requirements.txt \
+    && pip uninstall -y pip
 
 # Kopiowanie całego kodu źródłowego aplikacji
 COPY src/ /app/src/

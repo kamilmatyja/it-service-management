@@ -1,0 +1,15 @@
+# ai-generated: 100% - Two service-specific guard rules and examples, authored for the Lab 5 Semgrep stretch
+rules:
+  - id: svcdesk-test-clock-toggle
+    languages: [python]
+    severity: WARNING
+    message: The test clock switch must remain explicitly documented and must not be enabled in production.
+    pattern: os.environ.get("SVCDESK_TEST_CLOCK", ...)
+
+  - id: svcdesk-broad-exception-handler
+    languages: [python]
+    severity: WARNING
+    message: Catch a specific exception type so unexpected failures are not hidden.
+    pattern: |
+      except Exception:
+          ...

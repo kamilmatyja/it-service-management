@@ -1,5 +1,7 @@
 # checker output ("itsmlab verify 1 --json report.json" writes it into the repository root)
 report.json
+# Published practice fixtures intentionally contain fake secrets and vulnerable pins.
+lab5-practice/
 # Python
 __pycache__/
 *.pyc
