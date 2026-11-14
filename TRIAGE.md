@@ -17,14 +17,28 @@ proof that a code path is exploitable; each disposition below records the contex
 
 ## Bake-off
 
-The eight labelled defects produce a deliberately small, seeded sample, so these scores describe this set and not
-general scanner quality. Gitleaks found two secrets with one false positive (precision 0.667, recall 0.250); it
-matched C03 and C06 but missed C05. Grype and OSV-Scanner each found both vulnerable dependency pins with no false
-positives (precision 1.000, recall 0.250). Semgrep found A02, A14 and C06, but also made three false-positive
-matches (precision 0.500, recall 0.375). Trivy found C03 and both dependency defects with one false positive
-(precision 0.750, recall 0.375). I would keep Trivy and gitleaks as gates because the course rules define their
-blocking conditions and the canary confirms those gates fire; Grype, OSV-Scanner and Semgrep provide complementary
-reporting rather than additional blocking gates. A03, the path-traversal defect, and C05, a secret, were not found
-by any of the five detectors, showing that a clean scan cannot establish absence of defects. Every recall here is
-an upper bound for real maintenance work: detectors were measured against a small set of deliberately seeded,
-labelled examples, not a representative sample of the service's future defects.
+The eight labelled defects are a deliberately small, seeded sample; these measurements describe only this canary,
+not the scanners' expected production performance. Gitleaks returned TP/FP/FN 2/1/6 (precision 0.667, recall
+0.250, F1 0.364): it matched C03 and C06, missed C05, and produced one finding that matched no labelled defect.
+Grype and OSV-Scanner each returned 2/0/6 (precision 1.000, recall 0.250, F1 0.400), finding both vulnerable
+dependency pins but none of the six other defects. Semgrep returned 3/3/5 (precision 0.500, recall 0.375, F1
+0.429): it matched A02, A14 and C06, while three findings matched no defect. Trivy returned 3/1/5 (precision
+0.750, recall 0.375, F1 0.500), matching C03 and both dependency defects with one unmatched finding.
+
+The false positives matter operationally even when a detector catches real issues: someone must inspect and
+disposition each alert, and repeated noise can consume review capacity or teach maintainers to ignore the gate.
+The false negatives are more consequential here: A03 (path traversal) and C05 (a secret) were missed by all five
+tools, so even combining their outputs did not provide adequate coverage. These are defect-level counts: repeated
+findings on a defect do not inflate TP, and a finding is not credited unless both its location and weakness class
+match. The observed precision and recall are therefore useful for comparing these runs, but eight hand-seeded
+examples cannot estimate real-world false-positive or false-negative rates.
+
+I would retain Trivy and gitleaks as blocking gates because the published policy requires those gates and the
+canary run demonstrates that the vulnerability and secret checks stop the line; this is not a claim that their
+measured recall is sufficient. I would keep Grype and OSV-Scanner as complementary dependency reports, since they
+confirmed both vulnerable pins but did not broaden coverage in this set. Semgrep's three unmatched findings
+against three matches justify reviewing its alerts without making this configuration an additional blocker.
+For every detector, reviewers should record a reasoned disposition and re-check the policy rather than treating a
+green build as proof of safety. This is precisely where small, complete changes and a visible green/red build
+help: a red build pauses merges until the finding is understood, while the matrix makes the limitations of each
+detector explicit instead of hiding them behind one aggregate score.
