@@ -10,6 +10,4 @@ rules:
     languages: [python]
     severity: WARNING
     message: Catch a specific exception type so unexpected failures are not hidden.
-    pattern: |
-      except Exception:
-          ...
+    pattern-regex: 'except\s+Exception(?:\s+as\s+[A-Za-z_][A-Za-z0-9_]*)?\s*:'
