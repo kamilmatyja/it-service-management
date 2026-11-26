@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "strategy": "canary",
+  "slot": 3,
+  "candidate": "itsmlab.local/lab6-candidate:5f83f8138db8",
+  "seed": "practice",
+  "t_traffic_start": 1795693832.752,
+  "t_deploy_start": 1795693862.773,
+  "t_deploy_end": 1795693868.409,
+  "t_bake_end": 1795693883.409,
+  "exit": 3,
+  "killed": false,
+  "stack": {
+    "up": true,
+    "seconds": 1.7,
+    "error": null
+  },
+  "prometheus": {
+    "queries_before": 0.0,
+    "queries_after": 4.0,
+    "tracks": {
+      "stable": 865.2,
+      "canary": 17.8
+    },
+    "up": {
+      "stable": 1,
+      "canary": 1
+    },
+    "targets": {
+      "stable": 1,
+      "canary": 1
+    },
+    "interval": {
+      "canary": "2s",
+      "stable": "2s"
+    },
+    "ladder": [
+      "+Inf",
+      "0.005",
+      "0.01",
+      "0.025",
+      "0.05",
+      "0.075",
+      "0.1",
+      "0.15",
+      "0.2",
+      "0.25",
+      "0.3",
+      "0.4",
+      "0.5",
+      "0.75",
+      "1.0",
+      "2.5",
+      "5.0"
+    ]
+  },
+  "kb_index": {
+    "before": 0,
+    "after": 2026
+  },
+  "record": "CHANGE.md",
+  "behaviour": "slow",
+  "evaluation": {
+    "strategy": "canary",
+    "slot": 3,
+    "candidate_version": "2.1.0-rc.3",
+    "exit": 3,
+    "killed": false,
+    "requests": 2027,
+    "stopped": 0,
+    "warmup": {
+      "requests": 1201,
+      "answered": 1201,
+      "stable": 1201,
+      "stable_200": 1198,
+      "stable_5xx": 3,
+      "timeouts": 0,
+      "transport": 0,
+      "stable_fingerprint": "38bc611e"
+    },
+    "blast_radius": {
+      "total": 8,
+      "headerless": 8,
+      "candidate_5xx": 0,
+      "floor": 0,
+      "candidate_answers": 13,
+      "stable_5xx_share": 0.002493
+    },
+    "candidate": {
+      "answers": 13,
+      "first_answer": 1795693865.577,
+      "feature_off": 0
+    },
+    "end": {
+      "state": "rolled-back",
+      "requests": 520,
+      "answered": 520,
+      "candidate": 0,
+      "stable": 520,
+      "on": 0,
+      "off": 0,
+      "failures": 1
+    },
+    "end_state": "rolled-back",
+    "outcome": "rolled-back",
+    "timeline": [
+      {
+        "start": -35.0,
+        "phase": "warm-up",
+        "requests": 1,
+        "answered": 1,
+        "stable": 1,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -30.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -25.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -20.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -15.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -10.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -5.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 0.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 194,
+        "stable": 190,
+        "candidate": 4,
+        "other": 0,
+        "share": 0.0206,
+        "failures": {
+          "5xx": 1,
+          "timeout": 6,
+          "transport": 0,
+          "headerless": 6
+        }
+      },
+      {
+        "start": 5.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 198,
+        "stable": 189,
+        "candidate": 9,
+        "other": 0,
+        "share": 0.0455,
+        "failures": {
+          "5xx": 1,
+          "timeout": 1,
+          "transport": 1,
+          "headerless": 2
+        }
+      },
+      {
+        "start": 10.0,
+        "phase": "bake",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 15.0,
+        "phase": "bake",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 20.0,
+        "phase": "bake",
+        "requests": 26,
+        "answered": 26,
+        "stable": 26,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      }
+    ],
+    "canary": {
+      "ok": false,
+      "streak": 2,
+      "first_full": null
+    },
+    "fingerprints": {
+      "38bc611e": 13
+    },
+    "fingerprint_ok": true,
+    "kb_ok": true,
+    "kb": {
+      "delta": 2026.0,
+      "answers_200": 2014,
+      "needed": 1974
+    },
+    "queries": 4.0,
+    "queries_ok": true,
+    "tracks_ok": true,
+    "tracks": {
+      "stable": 865.2,
+      "canary": 17.8,
+      "answers": 818,
+      "needed": 737
+    },
+    "targets_ok": true
+  }
+}

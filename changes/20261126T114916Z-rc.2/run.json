@@ -1,0 +1,470 @@
+{
+  "schema": 1,
+  "strategy": "canary",
+  "slot": 2,
+  "candidate": "itsmlab.local/lab6-candidate:793adbdca1fb",
+  "seed": "practice",
+  "t_traffic_start": 1795693726.249,
+  "t_deploy_start": 1795693756.302,
+  "t_deploy_end": 1795693808.612,
+  "t_bake_end": 1795693823.612,
+  "exit": 0,
+  "killed": false,
+  "stack": {
+    "up": true,
+    "seconds": 1.7,
+    "error": null
+  },
+  "prometheus": {
+    "queries_before": 0.0,
+    "queries_after": 40.0,
+    "tracks": {
+      "stable": 1604.4,
+      "canary": 1130.5
+    },
+    "up": {
+      "stable": 1,
+      "canary": 1
+    },
+    "targets": {
+      "stable": 1,
+      "canary": 1
+    },
+    "interval": {
+      "canary": "2s",
+      "stable": "2s"
+    },
+    "ladder": [
+      "+Inf",
+      "0.005",
+      "0.01",
+      "0.025",
+      "0.05",
+      "0.075",
+      "0.1",
+      "0.15",
+      "0.2",
+      "0.25",
+      "0.3",
+      "0.4",
+      "0.5",
+      "0.75",
+      "1.0",
+      "2.5",
+      "5.0"
+    ]
+  },
+  "kb_index": {
+    "before": 0,
+    "after": 3895
+  },
+  "record": "CHANGE.md",
+  "behaviour": "honest",
+  "evaluation": {
+    "strategy": "canary",
+    "slot": 2,
+    "candidate_version": "2.1.0-rc.2",
+    "exit": 0,
+    "killed": false,
+    "requests": 3895,
+    "stopped": 0,
+    "warmup": {
+      "requests": 1203,
+      "answered": 1203,
+      "stable": 1203,
+      "stable_200": 1196,
+      "stable_5xx": 7,
+      "timeouts": 0,
+      "transport": 0,
+      "stable_fingerprint": "38bc611e"
+    },
+    "blast_radius": {
+      "total": 0,
+      "headerless": 0,
+      "candidate_5xx": 4,
+      "floor": 5,
+      "candidate_answers": 1131,
+      "stable_5xx_share": 0.00398
+    },
+    "candidate": {
+      "answers": 1131,
+      "first_answer": 1795693759.649,
+      "feature_off": 0
+    },
+    "end": {
+      "state": "promoted",
+      "requests": 520,
+      "answered": 520,
+      "candidate": 520,
+      "stable": 0,
+      "on": 0,
+      "off": 0,
+      "failures": 1
+    },
+    "end_state": "promoted",
+    "outcome": "promoted",
+    "timeline": [
+      {
+        "start": -35.0,
+        "phase": "warm-up",
+        "requests": 3,
+        "answered": 3,
+        "stable": 3,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -30.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -25.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -20.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -15.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -10.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 2,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": -5.0,
+        "phase": "warm-up",
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 3,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 0.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 190,
+        "candidate": 10,
+        "other": 0,
+        "share": 0.05,
+        "failures": {
+          "5xx": 2,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 5.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 180,
+        "candidate": 20,
+        "other": 0,
+        "share": 0.1,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 10.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 180,
+        "candidate": 20,
+        "other": 0,
+        "share": 0.1,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 15.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 180,
+        "candidate": 20,
+        "other": 0,
+        "share": 0.1,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 20.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 165,
+        "candidate": 35,
+        "other": 0,
+        "share": 0.175,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 25.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 150,
+        "candidate": 50,
+        "other": 0,
+        "share": 0.25,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 30.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 150,
+        "candidate": 50,
+        "other": 0,
+        "share": 0.25,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 35.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 125,
+        "candidate": 75,
+        "other": 0,
+        "share": 0.375,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 40.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 100,
+        "candidate": 100,
+        "other": 0,
+        "share": 0.5,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 45.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 100,
+        "candidate": 100,
+        "other": 0,
+        "share": 0.5,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 50.0,
+        "phase": "script",
+        "requests": 200,
+        "answered": 200,
+        "stable": 41,
+        "candidate": 159,
+        "other": 0,
+        "share": 0.795,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 55.0,
+        "phase": "bake",
+        "requests": 200,
+        "answered": 200,
+        "stable": 0,
+        "candidate": 200,
+        "other": 0,
+        "share": 1.0,
+        "failures": {
+          "5xx": 1,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 60.0,
+        "phase": "bake",
+        "requests": 200,
+        "answered": 200,
+        "stable": 0,
+        "candidate": 200,
+        "other": 0,
+        "share": 1.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 65.0,
+        "phase": "bake",
+        "requests": 92,
+        "answered": 92,
+        "stable": 0,
+        "candidate": 92,
+        "other": 0,
+        "share": 1.0,
+        "failures": {
+          "5xx": 0,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      }
+    ],
+    "canary": {
+      "ok": true,
+      "streak": 10,
+      "first_full": 55.0
+    },
+    "fingerprints": {
+      "38bc611e": 1131
+    },
+    "fingerprint_ok": true,
+    "kb_ok": true,
+    "kb": {
+      "delta": 3895.0,
+      "answers_200": 3880,
+      "needed": 3803
+    },
+    "queries": 40.0,
+    "queries_ok": true,
+    "tracks_ok": true,
+    "tracks": {
+      "stable": 1604.4,
+      "canary": 1130.5,
+      "answers": 2692,
+      "needed": 2423
+    },
+    "targets_ok": true
+  }
+}

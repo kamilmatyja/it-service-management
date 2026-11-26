@@ -1,0 +1,34 @@
+=== Deploying candidate itsmlab.local/lab6-candidate:793adbdca1fb ===
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreate 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreated 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Starting 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Started 
+Setting Caddy weights: stable=100, canary=0
+>>> Starting Canary Step 1: weight=10%, min_duration=20s
+Setting Caddy weights: stable=90, canary=10
+Canary step 1 (t+5s): canary_tot=0, fast=0, err=0, stable_tot=378.75
+Gate evaluation at t+5s: OK
+Canary step 1 (t+10s): canary_tot=34.74, fast=34.83, err=0, stable_tot=362.5
+Gate evaluation at t+10s: OK
+Canary step 1 (t+15s): canary_tot=37.5, fast=37.5, err=0, stable_tot=353.75
+Gate evaluation at t+15s: OK
+Canary step 1 (t+20s): canary_tot=48.75, fast=48.75, err=0, stable_tot=363.75
+Gate evaluation at t+20s: OK
+>>> Starting Canary Step 2: weight=25%, min_duration=15s
+Setting Caddy weights: stable=75, canary=25
+Canary step 2 (t+5s): canary_tot=55, fast=55, err=0, stable_tot=342.5
+Gate evaluation at t+5s: OK
+Canary step 2 (t+10s): canary_tot=106.25, fast=106.25, err=0, stable_tot=306.25
+Gate evaluation at t+10s: OK
+Canary step 2 (t+15s): canary_tot=93.75, fast=93.75, err=0, stable_tot=306.25
+Gate evaluation at t+15s: OK
+>>> Starting Canary Step 3: weight=50%, min_duration=15s
+Setting Caddy weights: stable=50, canary=50
+Canary step 3 (t+5s): canary_tot=151.25, fast=151.25, err=1.25, stable_tot=236.25
+Gate evaluation at t+5s: OK
+Canary step 3 (t+10s): canary_tot=187.5, fast=187.5, err=1.25, stable_tot=200
+Gate evaluation at t+10s: OK
+Canary step 3 (t+15s): canary_tot=210, fast=210.00000000000003, err=0, stable_tot=187.5
+Gate evaluation at t+15s: OK
+=== All canary steps completed successfully. Promoting candidate ===
+Setting Caddy weights: stable=0, canary=100

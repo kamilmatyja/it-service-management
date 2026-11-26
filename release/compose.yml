@@ -1,0 +1,72 @@
+# ai-generated: 0% - Hand-written compose file
+services:
+  edge:
+    image: caddy:2.11.4
+    ports:
+      - "${RELEASE_PORT:-8080}:8080"
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      - svcdesk-stable
+      - svcdesk-canary
+
+  svcdesk-stable:
+    image: ghcr.io/swasik/svcdesk-v2-seeded:2.0.0
+    environment:
+      KB_INDEX_URL: http://kb-index:8080
+      SVCDESK_BUCKETS: "0.005,0.01,0.025,0.05,0.075,0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.75,1,2.5,5"
+    depends_on:
+      - kb-index
+
+  svcdesk-canary:
+    image: ${CANARY_IMAGE:-ghcr.io/swasik/svcdesk-v2-seeded:2.0.0}
+    environment:
+      KB_INDEX_URL: http://kb-index:8080
+      SVCDESK_BUCKETS: "0.005,0.01,0.025,0.05,0.075,0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.75,1,2.5,5"
+    depends_on:
+      - kb-index
+
+  kb-index:
+    image: ghcr.io/swasik/seeded-toxic:2026
+    environment:
+      SEEDED_TOXIC_LOGIN: "kamilmatyja"
+
+  prometheus:
+    image: prom/prometheus:v3.15.0
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.enable-lifecycle'
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+    depends_on:
+      - svcdesk-stable
+      - svcdesk-canary
+
+configs:
+  caddyfile:
+    content: |
+      {
+        admin 0.0.0.0:2019
+      }
+      :8080 {
+        reverse_proxy svcdesk-stable:8080 svcdesk-canary:8080 {
+          lb_policy weighted_round_robin 100 0
+        }
+      }
+
+  prometheus_config:
+    content: |
+      global:
+        scrape_interval: 2s
+        evaluation_interval: 2s
+      scrape_configs:
+        - job_name: 'svcdesk'
+          static_configs:
+            - targets: ['svcdesk-stable:8080']
+              labels:
+                track: 'stable'
+            - targets: ['svcdesk-canary:8080']
+              labels:
+                track: 'canary'

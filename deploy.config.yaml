@@ -1,0 +1,24 @@
+# ai-generated: 0% - Hand-written configuration
+lab6_deploy:
+  slo:
+    window: 30d
+    availability:
+      objective: 0.99
+    latency:
+      objective: 0.99
+      threshold_seconds: 0.25
+  gate:
+    availability:
+      max_burn_rate: 14.4
+    latency:
+      max_burn_rate: 14.4
+    min_requests: 30
+    interval: 5s
+  steps:
+    - weight: 10
+      min_duration: 20s
+    - weight: 25
+      min_duration: 15s
+    - weight: 50
+      min_duration: 15s
+  timeout: 120s
