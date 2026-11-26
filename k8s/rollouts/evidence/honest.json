@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "AnalysisRun",
+      "metadata": {
+        "name": "svcdesk-analysis-honest"
+      },
+      "spec": {
+        "metrics": [
+          {
+            "name": "availability-success-rate",
+            "successCondition": "result[0] <= 0.144"
+          },
+          {
+            "name": "latency-success-rate",
+            "successCondition": "result[0] <= 0.144"
+          }
+        ]
+      },
+      "status": {
+        "phase": "Successful"
+      }
+    },
+    {
+      "apiVersion": "argoproj.io/v1alpha1",
+      "kind": "Rollout",
+      "metadata": {
+        "name": "svcdesk"
+      },
+      "spec": {
+        "template": {
+          "spec": {
+            "containers": [
+              {
+                "name": "svcdesk",
+                "image": "ghcr.io/swasik/svcdesk-v2-seeded:2.1.0-rc.2"
+              }
+            ]
+          }
+        }
+      },
+      "status": {
+        "phase": "Healthy",
+        "stableRS": "svcdesk-79b8df749f",
+        "currentPodHash": "svcdesk-79b8df749f"
+      }
+    }
+  ]
+}

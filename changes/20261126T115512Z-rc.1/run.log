@@ -1,4 +1,4 @@
-=== Deploying candidate itsmlab.local/lab6-candidate:3d0d0c5b6be5 ===
+=== Deploying candidate itsmlab.local/lab6-candidate:f16e6700e6e0 ===
  Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreate 
  Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreated 
  Container itsmlab6-a3f43df5-svcdesk-canary-1 Starting 
@@ -8,11 +8,11 @@ Setting Caddy weights: stable=100, canary=0
 Setting Caddy weights: stable=90, canary=10
 Canary step 1 (t+5s): canary_tot=0, fast=0, err=0, stable_tot=386.25
 Gate evaluation at t+5s: OK
-Canary step 1 (t+10s): canary_tot=34.555, fast=34.685, err=0, stable_tot=363.84096024006
+Canary step 1 (t+10s): canary_tot=28.42, fast=28.480000000000004, err=0, stable_tot=365
 Gate evaluation at t+10s: OK
-Canary step 1 (t+15s): canary_tot=25, fast=25, err=0, stable_tot=361.25
+Canary step 1 (t+15s): canary_tot=25, fast=25, err=0, stable_tot=365
 Gate evaluation at t+15s: OK
-Canary step 1 (t+20s): canary_tot=0, fast=0, err=0, stable_tot=361.25
-Gate evaluation at t+20s: HANG: Canary completed only 0.0 requests while stable completed 361.25 requests
-=== ROLLBACK TRIGGERED: Hang detected: HANG: Canary completed only 0.0 requests while stable completed 361.25 requests ===
+Canary step 1 (t+20s): canary_tot=0, fast=0, err=0, stable_tot=363.75
+Gate evaluation at t+20s: HANG: Canary completed only 0.0 requests while stable completed 363.75 requests
+=== ROLLBACK TRIGGERED: Hang detected: HANG: Canary completed only 0.0 requests while stable completed 363.75 requests ===
 Setting Caddy weights: stable=100, canary=0

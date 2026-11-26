@@ -1,0 +1,14 @@
+=== Deploying candidate itsmlab.local/lab6-candidate:ac1b80756802 ===
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreate 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Recreated 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Starting 
+ Container itsmlab6-a3f43df5-svcdesk-canary-1 Started 
+Setting Caddy weights: stable=100, canary=0
+>>> Starting Canary Step 1: weight=10%, min_duration=20s
+Setting Caddy weights: stable=90, canary=10
+Canary step 1 (t+5s): canary_tot=0, fast=0, err=0, stable_tot=382.5
+Gate evaluation at t+5s: OK
+Canary step 1 (t+10s): canary_tot=31.711333333333332, fast=13.438333333333333, err=0, stable_tot=361.25
+Gate evaluation at t+10s: LAT_SLI: Slow share 0.5762 exceeded threshold 0.144
+=== ROLLBACK TRIGGERED: Latency SLI violated: LAT_SLI: Slow share 0.5762 exceeded threshold 0.144 ===
+Setting Caddy weights: stable=100, canary=0

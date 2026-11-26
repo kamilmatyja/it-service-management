@@ -2,25 +2,25 @@
   "schema": 1,
   "strategy": "canary",
   "slot": 2,
-  "candidate": "itsmlab.local/lab6-candidate:793adbdca1fb",
+  "candidate": "itsmlab.local/lab6-candidate:3f1ece0190dc",
   "seed": "practice",
-  "t_traffic_start": 1795693726.249,
-  "t_deploy_start": 1795693756.302,
-  "t_deploy_end": 1795693808.612,
-  "t_bake_end": 1795693823.612,
+  "t_traffic_start": 1795694158.664,
+  "t_deploy_start": 1795694188.715,
+  "t_deploy_end": 1795694240.612,
+  "t_bake_end": 1795694255.612,
   "exit": 0,
   "killed": false,
   "stack": {
     "up": true,
-    "seconds": 1.7,
+    "seconds": 1.9,
     "error": null
   },
   "prometheus": {
     "queries_before": 0.0,
     "queries_after": 40.0,
     "tracks": {
-      "stable": 1604.4,
-      "canary": 1130.5
+      "stable": 1563.2,
+      "canary": 1162.6
     },
     "up": {
       "stable": 1,
@@ -31,8 +31,8 @@
       "canary": 1
     },
     "interval": {
-      "canary": "2s",
-      "stable": "2s"
+      "stable": "2s",
+      "canary": "2s"
     },
     "ladder": [
       "+Inf",
@@ -56,7 +56,7 @@
   },
   "kb_index": {
     "before": 0,
-    "after": 3895
+    "after": 3878
   },
   "record": "CHANGE.md",
   "behaviour": "honest",
@@ -66,29 +66,29 @@
     "candidate_version": "2.1.0-rc.2",
     "exit": 0,
     "killed": false,
-    "requests": 3895,
+    "requests": 3878,
     "stopped": 0,
     "warmup": {
       "requests": 1203,
       "answered": 1203,
       "stable": 1203,
-      "stable_200": 1196,
-      "stable_5xx": 7,
+      "stable_200": 1197,
+      "stable_5xx": 6,
       "timeouts": 0,
       "transport": 0,
       "stable_fingerprint": "38bc611e"
     },
     "blast_radius": {
-      "total": 0,
+      "total": 2,
       "headerless": 0,
-      "candidate_5xx": 4,
-      "floor": 5,
-      "candidate_answers": 1131,
-      "stable_5xx_share": 0.00398
+      "candidate_5xx": 5,
+      "floor": 3,
+      "candidate_answers": 1130,
+      "stable_5xx_share": 0.002911
     },
     "candidate": {
-      "answers": 1131,
-      "first_answer": 1795693759.649,
+      "answers": 1130,
+      "first_answer": 1795694191.789,
       "feature_off": 0
     },
     "end": {
@@ -99,7 +99,7 @@
       "stable": 0,
       "on": 0,
       "off": 0,
-      "failures": 1
+      "failures": 2
     },
     "end_state": "promoted",
     "outcome": "promoted",
@@ -130,7 +130,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 0,
+          "5xx": 3,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -146,7 +146,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -162,7 +162,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -194,7 +194,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 2,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -210,7 +210,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 3,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -226,7 +226,7 @@
         "other": 0,
         "share": 0.05,
         "failures": {
-          "5xx": 2,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -242,7 +242,7 @@
         "other": 0,
         "share": 0.1,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -258,7 +258,7 @@
         "other": 0,
         "share": 0.1,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -274,7 +274,7 @@
         "other": 0,
         "share": 0.1,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -290,7 +290,7 @@
         "other": 0,
         "share": 0.175,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -354,7 +354,7 @@
         "other": 0,
         "share": 0.5,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -370,7 +370,7 @@
         "other": 0,
         "share": 0.5,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -381,10 +381,10 @@
         "phase": "script",
         "requests": 200,
         "answered": 200,
-        "stable": 41,
-        "candidate": 159,
+        "stable": 25,
+        "candidate": 175,
         "other": 0,
-        "share": 0.795,
+        "share": 0.875,
         "failures": {
           "5xx": 1,
           "timeout": 0,
@@ -402,7 +402,7 @@
         "other": 0,
         "share": 1.0,
         "failures": {
-          "5xx": 1,
+          "5xx": 2,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -427,10 +427,10 @@
       {
         "start": 65.0,
         "phase": "bake",
-        "requests": 92,
-        "answered": 92,
+        "requests": 75,
+        "answered": 75,
         "stable": 0,
-        "candidate": 92,
+        "candidate": 75,
         "other": 0,
         "share": 1.0,
         "failures": {
@@ -447,23 +447,23 @@
       "first_full": 55.0
     },
     "fingerprints": {
-      "38bc611e": 1131
+      "38bc611e": 1130
     },
     "fingerprint_ok": true,
     "kb_ok": true,
     "kb": {
-      "delta": 3895.0,
-      "answers_200": 3880,
-      "needed": 3803
+      "delta": 3878.0,
+      "answers_200": 3865,
+      "needed": 3788
     },
     "queries": 40.0,
     "queries_ok": true,
     "tracks_ok": true,
     "tracks": {
-      "stable": 1604.4,
-      "canary": 1130.5,
-      "answers": 2692,
-      "needed": 2423
+      "stable": 1563.2,
+      "canary": 1162.6,
+      "answers": 2675,
+      "needed": 2408
     },
     "targets_ok": true
   }

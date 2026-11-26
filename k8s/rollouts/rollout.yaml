@@ -1,0 +1,30 @@
+# ai-generated: 0% - Hand-crafted configuration
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: svcdesk
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 10s
+        - analysis:
+            templates:
+              - templateName: svcdesk-analysis
+        - setWeight: 50
+        - pause:
+            duration: 10s
+  selector:
+    matchLabels:
+      app: svcdesk
+  template:
+    metadata:
+      labels:
+        app: svcdesk
+    spec:
+      containers:
+        - name: svcdesk
+          image: ghcr.io/swasik/svcdesk-v2-seeded:2.0.0

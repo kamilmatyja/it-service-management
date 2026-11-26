@@ -2,25 +2,25 @@
   "schema": 1,
   "strategy": "canary",
   "slot": 3,
-  "candidate": "itsmlab.local/lab6-candidate:5f83f8138db8",
+  "candidate": "itsmlab.local/lab6-candidate:ac1b80756802",
   "seed": "practice",
-  "t_traffic_start": 1795693832.752,
-  "t_deploy_start": 1795693862.773,
-  "t_deploy_end": 1795693868.409,
-  "t_bake_end": 1795693883.409,
+  "t_traffic_start": 1795694265.605,
+  "t_deploy_start": 1795694295.652,
+  "t_deploy_end": 1795694306.562,
+  "t_bake_end": 1795694321.562,
   "exit": 3,
   "killed": false,
   "stack": {
     "up": true,
-    "seconds": 1.7,
+    "seconds": 2.1,
     "error": null
   },
   "prometheus": {
     "queries_before": 0.0,
-    "queries_after": 4.0,
+    "queries_after": 8.0,
     "tracks": {
-      "stable": 865.2,
-      "canary": 17.8
+      "stable": 999.5,
+      "canary": 38.3
     },
     "up": {
       "stable": 1,
@@ -31,8 +31,8 @@
       "canary": 1
     },
     "interval": {
-      "canary": "2s",
-      "stable": "2s"
+      "stable": "2s",
+      "canary": "2s"
     },
     "ladder": [
       "+Inf",
@@ -56,7 +56,7 @@
   },
   "kb_index": {
     "before": 0,
-    "after": 2026
+    "after": 2239
   },
   "record": "CHANGE.md",
   "behaviour": "slow",
@@ -66,29 +66,29 @@
     "candidate_version": "2.1.0-rc.3",
     "exit": 3,
     "killed": false,
-    "requests": 2027,
+    "requests": 2239,
     "stopped": 0,
     "warmup": {
-      "requests": 1201,
-      "answered": 1201,
-      "stable": 1201,
-      "stable_200": 1198,
-      "stable_5xx": 3,
+      "requests": 1202,
+      "answered": 1202,
+      "stable": 1202,
+      "stable_200": 1200,
+      "stable_5xx": 2,
       "timeouts": 0,
       "transport": 0,
       "stable_fingerprint": "38bc611e"
     },
     "blast_radius": {
-      "total": 8,
-      "headerless": 8,
+      "total": 20,
+      "headerless": 20,
       "candidate_5xx": 0,
       "floor": 0,
-      "candidate_answers": 13,
-      "stable_5xx_share": 0.002493
+      "candidate_answers": 20,
+      "stable_5xx_share": 0.004548
     },
     "candidate": {
-      "answers": 13,
-      "first_answer": 1795693865.577,
+      "answers": 20,
+      "first_answer": 1795694298.605,
       "feature_off": 0
     },
     "end": {
@@ -99,7 +99,7 @@
       "stable": 520,
       "on": 0,
       "off": 0,
-      "failures": 1
+      "failures": 3
     },
     "end_state": "rolled-back",
     "outcome": "rolled-back",
@@ -107,9 +107,9 @@
       {
         "start": -35.0,
         "phase": "warm-up",
-        "requests": 1,
-        "answered": 1,
-        "stable": 1,
+        "requests": 2,
+        "answered": 2,
+        "stable": 2,
         "candidate": 0,
         "other": 0,
         "share": 0.0,
@@ -130,7 +130,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -146,7 +146,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 1,
+          "5xx": 0,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -178,7 +178,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -220,48 +220,48 @@
         "start": 0.0,
         "phase": "script",
         "requests": 200,
-        "answered": 194,
+        "answered": 195,
         "stable": 190,
-        "candidate": 4,
+        "candidate": 5,
         "other": 0,
-        "share": 0.0206,
+        "share": 0.0256,
         "failures": {
-          "5xx": 1,
-          "timeout": 6,
+          "5xx": 2,
+          "timeout": 5,
           "transport": 0,
-          "headerless": 6
+          "headerless": 5
         }
       },
       {
         "start": 5.0,
         "phase": "script",
         "requests": 200,
-        "answered": 198,
-        "stable": 189,
-        "candidate": 9,
+        "answered": 190,
+        "stable": 180,
+        "candidate": 10,
         "other": 0,
-        "share": 0.0455,
+        "share": 0.0526,
         "failures": {
-          "5xx": 1,
-          "timeout": 1,
-          "transport": 1,
-          "headerless": 2
+          "5xx": 3,
+          "timeout": 10,
+          "transport": 0,
+          "headerless": 10
         }
       },
       {
         "start": 10.0,
-        "phase": "bake",
+        "phase": "script",
         "requests": 200,
-        "answered": 200,
-        "stable": 200,
-        "candidate": 0,
+        "answered": 195,
+        "stable": 190,
+        "candidate": 5,
         "other": 0,
-        "share": 0.0,
+        "share": 0.0256,
         "failures": {
           "5xx": 0,
-          "timeout": 0,
+          "timeout": 5,
           "transport": 0,
-          "headerless": 0
+          "headerless": 5
         }
       },
       {
@@ -274,7 +274,7 @@
         "other": 0,
         "share": 0.0,
         "failures": {
-          "5xx": 0,
+          "5xx": 1,
           "timeout": 0,
           "transport": 0,
           "headerless": 0
@@ -283,9 +283,25 @@
       {
         "start": 20.0,
         "phase": "bake",
-        "requests": 26,
-        "answered": 26,
-        "stable": 26,
+        "requests": 200,
+        "answered": 200,
+        "stable": 200,
+        "candidate": 0,
+        "other": 0,
+        "share": 0.0,
+        "failures": {
+          "5xx": 2,
+          "timeout": 0,
+          "transport": 0,
+          "headerless": 0
+        }
+      },
+      {
+        "start": 25.0,
+        "phase": "bake",
+        "requests": 37,
+        "answered": 37,
+        "stable": 37,
         "candidate": 0,
         "other": 0,
         "share": 0.0,
@@ -298,28 +314,28 @@
       }
     ],
     "canary": {
-      "ok": false,
-      "streak": 2,
+      "ok": true,
+      "streak": 3,
       "first_full": null
     },
     "fingerprints": {
-      "38bc611e": 13
+      "38bc611e": 20
     },
     "fingerprint_ok": true,
     "kb_ok": true,
     "kb": {
-      "delta": 2026.0,
-      "answers_200": 2014,
-      "needed": 1974
+      "delta": 2239.0,
+      "answers_200": 2209,
+      "needed": 2165
     },
-    "queries": 4.0,
+    "queries": 8.0,
     "queries_ok": true,
     "tracks_ok": true,
     "tracks": {
-      "stable": 865.2,
-      "canary": 17.8,
-      "answers": 818,
-      "needed": 737
+      "stable": 999.5,
+      "canary": 38.3,
+      "answers": 1017,
+      "needed": 916
     },
     "targets_ok": true
   }
